@@ -15,6 +15,7 @@ import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class profileActivity extends AppCompatActivity /*implements View.OnClickListener*/ {
@@ -28,6 +29,7 @@ public class profileActivity extends AppCompatActivity /*implements View.OnClick
     private ListView listview;
     private FirebaseListAdapter<ChatMessage> adapter;
     private EditText text;
+    private DatabaseReference ChatRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ public class profileActivity extends AppCompatActivity /*implements View.OnClick
         }
 
         FirebaseUser user = fa.getCurrentUser();
+        ChatRef = FirebaseDatabase.getInstance().getReference();
         /*
         userEmailTextView = (TextView)findViewById(R.id.userEmailTextView);
         userEmailTextView.setText("Welcome " + user.getEmail());
@@ -60,9 +63,11 @@ public class profileActivity extends AppCompatActivity /*implements View.OnClick
 
     private void displayChatMessages(){
         FirebaseListOptions<ChatMessage> options = new FirebaseListOptions.Builder<ChatMessage>()
+                .setLifecycleOwner(this)
                 .setLayout(R.layout.message)
-                .setQuery(FirebaseDatabase.getInstance().getReference(), ChatMessage.class)
+                .setQuery(ChatRef.child("Message"), ChatMessage.class)
                 .build();
+
         adapter = new FirebaseListAdapter<ChatMessage>(options){
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
@@ -87,11 +92,10 @@ public class profileActivity extends AppCompatActivity /*implements View.OnClick
         @Override
         public void onClick(View btn) {
             if(text.getText().toString().length()!=0) {
-                FirebaseDatabase.getInstance()
-                        .getReference()
+                ChatRef.child("Message")
                         .push()
                         .setValue(new ChatMessage(text.getText().toString(),
-                                fa.getCurrentUser().getDisplayName())
+                                fa.getCurrentUser().getEmail())
                         );
 
                 // Clear the input
