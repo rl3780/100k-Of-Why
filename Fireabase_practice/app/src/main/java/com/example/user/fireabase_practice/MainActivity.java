@@ -34,10 +34,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fa = FirebaseAuth.getInstance();
 
-        if(fa.getCurrentUser() != null){
+        /*if(fa.getCurrentUser() != null){
             finish();
-            startActivity(new Intent(getApplicationContext(), profileActivity.class));
-        }
+            startActivity(new Intent(getApplicationContext(), logoutActivity.class));
+        }*/
 
         pd = new ProgressDialog(this);
 
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             finish();
-                            startActivity(new Intent(getApplicationContext(), profileActivity.class));
+                            startActivity(new Intent(getApplicationContext(), logoutActivity.class));
                         }
                         else{
                             Toast.makeText(MainActivity.this, "Could not register..., please try again", Toast.LENGTH_SHORT).show();

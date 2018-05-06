@@ -34,10 +34,10 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
         fa = FirebaseAuth.getInstance();
 
-        if(fa.getCurrentUser() != null){
+        /*if(fa.getCurrentUser() != null){
             finish();
-            startActivity(new Intent(getApplicationContext(), profileActivity.class));
-        }
+            startActivity(new Intent(getApplicationContext(), logoutActivity.class));
+        }*/
 
         pd = new ProgressDialog(this);
 
@@ -73,7 +73,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                         pd.dismiss();
                         if(task.isSuccessful()){
                             finish();
-                            startActivity(new Intent(getApplicationContext(), profileActivity.class));
+                            startActivity(new Intent(getApplicationContext(), logoutActivity.class));
                         }
                     }
                 });

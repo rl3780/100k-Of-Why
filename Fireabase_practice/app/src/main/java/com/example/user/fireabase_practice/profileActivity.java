@@ -5,11 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class profileActivity extends AppCompatActivity /*implements View.OnClickListener*/ {
+public class profileActivity extends AppCompatActivity implements View.OnClickListener /*implements View.OnClickListener*/ {
 
     private FirebaseAuth fa;
     /*
@@ -30,6 +30,7 @@ public class profileActivity extends AppCompatActivity /*implements View.OnClick
     private FirebaseListAdapter<ChatMessage> adapter;
     private EditText text;
     private DatabaseReference ChatRef;
+    private Button btnreturn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +53,15 @@ public class profileActivity extends AppCompatActivity /*implements View.OnClick
         logoutButton = (Button)findViewById(R.id.logoutButton);
 
         logoutButton.setOnClickListener(this);*/
-        send_button = (Button)findViewById(R.id.button);
-        text = (EditText)findViewById(R.id.editText);
+        btnreturn = (Button)findViewById(R.id.btn_return);
+        send_button = (Button)findViewById(R.id.btn_send);
+        text = (EditText)findViewById(R.id.enter_message);
 
-        listview = (ListView) findViewById(R.id.listview);
+        listview = (ListView) findViewById(R.id.content_list);
         displayChatMessages();
 
-        send_button.setOnClickListener(send_btn);
+        send_button.setOnClickListener(this);
+        btnreturn.setOnClickListener(this);
     }
 
     private void displayChatMessages(){
@@ -88,9 +91,11 @@ public class profileActivity extends AppCompatActivity /*implements View.OnClick
         listview.setAdapter(adapter);
     }
 
-    private final View.OnClickListener send_btn = new View.OnClickListener() {
-        @Override
-        public void onClick(View btn) {
+    public void onClick(View v) {
+        if(v == btnreturn){
+            startActivity(new Intent(profileActivity.this, logoutActivity.class));
+        }
+        if(v == send_button){
             if(text.getText().toString().length()!=0) {
                 ChatRef.child("Message")
                         .push()
@@ -102,5 +107,5 @@ public class profileActivity extends AppCompatActivity /*implements View.OnClick
                 text.setText("");
             }
         }
-    };
+    }
 }
