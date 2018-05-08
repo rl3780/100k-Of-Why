@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class logoutActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private TextView username;
     private Button logoutButton;
     private Button chatButton;
     private ProgressDialog pd;
@@ -34,6 +35,7 @@ public class logoutActivity extends AppCompatActivity implements View.OnClickLis
         }*/
         pd = new ProgressDialog(this);
 
+        username = (TextView)findViewById(R.id.usernameTextView);
         chatButton = (Button)findViewById(R.id.btnchat);
         logoutButton = (Button)findViewById(R.id.btnlogout);
 

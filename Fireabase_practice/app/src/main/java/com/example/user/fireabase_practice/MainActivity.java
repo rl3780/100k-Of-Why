@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private EditText usernameEditText;
     private EditText emailEditText;
     private EditText passwordEditText;
     private Button registerButton;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         pd = new ProgressDialog(this);
 
+        usernameEditText = (EditText)findViewById(R.id.usernameEditText);
         emailEditText = (EditText)findViewById(R.id.emailEditText);
         passwordEditText = (EditText)findViewById(R.id.passwordEditText);
         registerButton = (Button)findViewById(R.id.registerButton);
