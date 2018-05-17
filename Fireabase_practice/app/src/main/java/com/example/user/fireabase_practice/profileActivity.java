@@ -100,7 +100,7 @@ public class profileActivity extends AppCompatActivity implements View.OnClickLi
                 ChatRef.child("Message")
                         .push()
                         .setValue(new ChatMessage(text.getText().toString(),
-                                fa.getCurrentUser().getEmail())
+                                fa.getCurrentUser().getDisplayName())
                         );
 
                 // Clear the input

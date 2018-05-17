@@ -12,6 +12,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.firebase.ui.database.FirebaseListOptions;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 public class logoutActivity extends AppCompatActivity implements View.OnClickListener {
@@ -38,6 +42,8 @@ public class logoutActivity extends AppCompatActivity implements View.OnClickLis
         username = (TextView)findViewById(R.id.usernameTextView);
         chatButton = (Button)findViewById(R.id.btnchat);
         logoutButton = (Button)findViewById(R.id.btnlogout);
+        while(fa.getCurrentUser().getDisplayName() == null){ }
+        username.setText(fa.getCurrentUser().getDisplayName());
 
         chatButton.setOnClickListener(this);
         logoutButton.setOnClickListener(this);
