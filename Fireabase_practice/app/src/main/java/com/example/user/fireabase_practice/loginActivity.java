@@ -33,7 +33,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class loginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
+public class loginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     private EditText emailEditText;
     private EditText passwordEditText;
@@ -70,28 +70,28 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        sign_in_button = (SignInButton)findViewById(R.id.sign_in_button);
+        sign_in_button = (SignInButton) findViewById(R.id.sign_in_button);
 
-        emailEditText = (EditText)findViewById(R.id.emailEditText);
-        passwordEditText = (EditText)findViewById(R.id.passwordEditText);
-        registerButton = (Button)findViewById(R.id.registerButton);
-        loginTextView = (TextView)findViewById(R.id.loginTextView);
+        emailEditText = (EditText) findViewById(R.id.emailEditText);
+        passwordEditText = (EditText) findViewById(R.id.passwordEditText);
+        registerButton = (Button) findViewById(R.id.registerButton);
+        loginTextView = (TextView) findViewById(R.id.loginTextView);
 
         registerButton.setOnClickListener(this);
         loginTextView.setOnClickListener(this);
         sign_in_button.setOnClickListener(this);
     }
 
-    private void registerUser(){
+    private void registerUser() {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 
-        if(TextUtils.isEmpty(email)){
-            Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(this, "@string/"+"ask_email", Toast.LENGTH_LONG).show();
             return;
         }
-        if(TextUtils.isEmpty(password)){
-            Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(this, R.string.ask_password, Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -103,10 +103,10 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         pd.dismiss();
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             finish();
                             startActivity(new Intent(getApplicationContext(), logoutActivity.class));
-                        }else{
+                        } else {
                             Toast.makeText(loginActivity.this, "Could not login..., please try again", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -115,29 +115,29 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if(v == registerButton){
+        if (v == registerButton) {
             registerUser();
         }
-        if(v == loginTextView){
+        if (v == loginTextView) {
             startActivity(new Intent(this, MainActivity.class));
         }
-        if(v == sign_in_button){
+        if (v == sign_in_button) {
             signIn();
         }
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
         updateUI(fa.getCurrentUser());
     }
 
-    public void updateUI(FirebaseUser account){
-        if (account != null){
+    public void updateUI(FirebaseUser account) {
+        if (account != null) {
             startActivity(new Intent(getApplicationContext(), logoutActivity.class));
-        }else{
+        } else {
             Toast.makeText(loginActivity.this, "No account~!!", Toast.LENGTH_LONG).show();
         }
     }
@@ -160,40 +160,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             }
         }
     }
-
-    /*@Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if (result.isSuccess()) {
-                // Google Sign-In was successful, authenticate with Firebase
-                GoogleSignInAccount account = result.getSignInAccount();
-                firebaseAuthWithGoogle(account);
-            } else {
-                // Google Sign-In failed
-                Toast.makeText(loginActivity.this, "onActivityResult failed~!!", Toast.LENGTH_LONG).show();
-            }
-        }else{
-            Toast.makeText(loginActivity.this, "RC_SIGN_IN failed~!!", Toast.LENGTH_LONG).show();
-        }
-    }*/
-
-    /*private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
-        fa.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            updateUI(fa.getCurrentUser());
-                        } else {
-                            Toast.makeText(loginActivity.this, "firebaseAuthWithGoogle failed~!!", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
-    }*/
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());

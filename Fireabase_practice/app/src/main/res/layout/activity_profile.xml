@@ -17,7 +17,8 @@
         android:layout_marginTop="16dp"
         android:background="@android:drawable/ic_menu_revert"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_alignLeft="@+id/content_list" />
 
 
     <Button
@@ -35,7 +36,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.863"
         app:layout_constraintStart_toEndOf="@+id/btn_return"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_alignParentRight="true" />
 
     <ListView
         android:id="@+id/content_list"
@@ -69,7 +71,8 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_send"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_alignParentLeft="true" />
 
     <Button
         android:id="@+id/btn_send"
@@ -82,7 +85,8 @@
         android:text="sent"
         app:layout_constraintBottom_toBottomOf="@+id/enter_message"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/enter_message" />
+        app:layout_constraintTop_toTopOf="@+id/enter_message"
+        android:layout_alignLeft="@+id/btn_return" />
 
 
 </android.support.constraint.ConstraintLayout>
