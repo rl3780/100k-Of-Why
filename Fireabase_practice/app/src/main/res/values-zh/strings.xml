@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="registered">已經註冊</string>
-    <string name="app_name">firebase練習</string>
-    <string name="title_activity_logout">登出</string>
-    <string name="chat">聊天</string>
-    <string name="enter_name">請輸入名稱</string>
-    <string name="register">註冊</string>
-</resources>
