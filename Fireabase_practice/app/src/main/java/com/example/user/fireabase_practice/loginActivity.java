@@ -1,12 +1,10 @@
 package com.example.user.fireabase_practice;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -18,9 +16,7 @@ import android.widget.Toast;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
@@ -33,7 +29,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class loginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener{
+public class loginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
     private EditText emailEditText;
     private EditText passwordEditText;
@@ -42,7 +38,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     private ProgressDialog pd;
     private FirebaseAuth fa;
     private GoogleSignInOptions gso;
-    private GoogleSignInClient mGoogleSignInClient;
     private GoogleApiClient mGoogleApiClient;
     private SignInButton sign_in_button;
     private static final int RC_SIGN_IN = 1;
@@ -67,30 +62,27 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        sign_in_button = (SignInButton) findViewById(R.id.sign_in_button);
 
-        sign_in_button = (SignInButton)findViewById(R.id.sign_in_button);
-
-        emailEditText = (EditText)findViewById(R.id.emailEditText);
-        passwordEditText = (EditText)findViewById(R.id.passwordEditText);
-        registerButton = (Button)findViewById(R.id.registerButton);
-        loginTextView = (TextView)findViewById(R.id.loginTextView);
+        emailEditText = (EditText) findViewById(R.id.emailEditText);
+        passwordEditText = (EditText) findViewById(R.id.passwordEditText);
+        registerButton = (Button) findViewById(R.id.registerButton);
+        loginTextView = (TextView) findViewById(R.id.loginTextView);
 
         registerButton.setOnClickListener(this);
         loginTextView.setOnClickListener(this);
         sign_in_button.setOnClickListener(this);
     }
 
-    private void registerUser(){
+    private void registerUser() {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 
-        if(TextUtils.isEmpty(email)){
+        if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show();
             return;
         }
-        if(TextUtils.isEmpty(password)){
+        if (TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show();
             return;
         }
@@ -103,10 +95,10 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         pd.dismiss();
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             finish();
                             startActivity(new Intent(getApplicationContext(), logoutActivity.class));
-                        }else{
+                        } else {
                             Toast.makeText(loginActivity.this, "Could not login..., please try again", Toast.LENGTH_LONG).show();
                         }
                     }
@@ -115,29 +107,29 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if(v == registerButton){
+        if (v == registerButton) {
             registerUser();
         }
-        if(v == loginTextView){
+        if (v == loginTextView) {
             startActivity(new Intent(this, MainActivity.class));
         }
-        if(v == sign_in_button){
+        if (v == sign_in_button) {
             signIn();
         }
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
         updateUI(fa.getCurrentUser());
     }
 
-    public void updateUI(FirebaseUser account){
-        if (account != null){
+    public void updateUI(FirebaseUser account) {
+        if (account != null) {
             startActivity(new Intent(getApplicationContext(), logoutActivity.class));
-        }else{
+        } else {
             Toast.makeText(loginActivity.this, "No account~!!", Toast.LENGTH_LONG).show();
         }
     }

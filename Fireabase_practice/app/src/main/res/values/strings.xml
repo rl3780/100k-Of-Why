@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Fireabase_practice</string>
     <string name="title_activity_logout">logout</string>
+    <string name="chat">chat</string>
+    <string name="enter_name">Enter your name</string>
+    <string name="register">Register</string>
+    <string name="registered">Already Registered? Sign in here</string>
 </resources>
