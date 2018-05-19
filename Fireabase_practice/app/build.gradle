@@ -41,6 +41,9 @@ dependencies {
 
     // FirebaseUI for Cloud Storage
     implementation 'com.firebaseui:firebase-ui-storage:3.3.1'
+
+    // FirebaseUI for google sign in
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -33,10 +33,6 @@ public class logoutActivity extends AppCompatActivity implements View.OnClickLis
 
         fa = FirebaseAuth.getInstance();
 
-        /*if(fa.getCurrentUser() != null){
-            finish();
-            startActivity(new Intent(getApplicationContext(), profileActivity.class));
-        }*/
         pd = new ProgressDialog(this);
 
         username = (TextView)findViewById(R.id.usernameTextView);
@@ -54,6 +50,7 @@ public class logoutActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(this, profileActivity.class));
         }
         if(v == logoutButton){
+            FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(this, loginActivity.class));
         }
     }
