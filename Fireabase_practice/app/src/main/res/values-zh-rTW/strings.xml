@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Fireabase_practice</string>
+    <string name="app_name">Firebase_practice</string>
     <string name="title_activity_logout">登出</string>
     <string name="en_ask_email">請輸入電子信箱</string>
     <string name="ask_password">請輸入密碼</string>

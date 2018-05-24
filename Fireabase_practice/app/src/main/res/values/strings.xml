@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Fireabase_practice</string>
+    <string name="app_name">Firebase_practice</string>
     <string name="title_activity_logout">logout</string>
     <string name="chat">chat</string>
     <string name="enter_name">Enter your name</string>

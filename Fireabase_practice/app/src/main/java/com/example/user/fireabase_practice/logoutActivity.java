@@ -44,6 +44,7 @@ public class logoutActivity extends AppCompatActivity implements View.OnClickLis
         if (v == logoutButton) {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(this, loginActivity.class));
+            finish();
         }
     }
 }

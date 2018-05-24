@@ -120,6 +120,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         }
         if (v == loginTextView) {
             startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
         if (v == sign_in_button) {
             signIn();

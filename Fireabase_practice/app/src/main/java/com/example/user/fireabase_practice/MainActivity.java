@@ -102,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (v == signupTextView) {
             startActivity(new Intent(this, loginActivity.class));
+            finish();
         }
     }
 }
