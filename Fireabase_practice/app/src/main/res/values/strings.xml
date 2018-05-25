@@ -1,11 +1,21 @@
 <resources>
+    <!--Share-->
     <string name="app_name">Firebase_practice</string>
-    <string name="title_activity_logout">logout</string>
-    <string name="chat">chat</string>
-    <string name="enter_name">Enter your name</string>
+    <!--MainActivity-->
     <string name="register">Register</string>
-    <string name="registered">Already Registered? Sign in here</string>
-    <string name="en_ask_email">Please enter email</string>
-    <string name="ask_password">Please enter password</string>
-    <string name="login">Login...</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="enter_your_password">Enter your password</string>
+    <string name="register_user">Register user</string>
+    <string name="already_registered">Already Registered? Sign in here</string>
+    <!--loginActivity-->
+    <string name="login">Login</string>
+    <string name="not_have_account">Not have an account? Sign up here</string>
+    <!--logoutActivity-->
+    <string name="user_name">Username</string>
+    <string name="logout">logout</string>
+    <string name="chat">chat</string>
+    <!--profileActivity-->
+    <string name="input">input</string>
+    <string name="sent">sent</string>
 </resources>

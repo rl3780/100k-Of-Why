@@ -90,10 +90,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show();
             return;
         }
-        if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, R.string.ask_password, Toast.LENGTH_LONG).show();
-            return;
-        }
 
         pd.setMessage("Login...");
         pd.show();

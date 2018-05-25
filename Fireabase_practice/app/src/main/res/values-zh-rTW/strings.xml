@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--Share-->
     <string name="app_name">Firebase_practice</string>
-    <string name="title_activity_logout">登出</string>
-    <string name="en_ask_email">請輸入電子信箱</string>
-    <string name="ask_password">請輸入密碼</string>
-    <string name="login">登入中</string>
-    <string name="chat">聊天</string>
-    <string name="enter_name">請輸入名字</string>
+    <!--MainActivity-->
     <string name="register">註冊</string>
-    <string name="registered">已經註冊?點此登入</string>
+    <string name="enter_your_name">請輸入名稱</string>
+    <string name="enter_your_email">請輸入信箱</string>
+    <string name="enter_your_password">請輸入密碼</string>
+    <string name="register_user">註冊</string>
+    <string name="already_registered">帳號已建立? 登入</string>
+    <!--loginActivity-->
+    <string name="login">登入</string>
+    <string name="not_have_account">還沒有帳號嗎? 建立一個</string>
+    <!--logoutActivity-->
+    <string name="user_name">使用者名稱</string>
+    <string name="logout">登出</string>
+    <string name="chat">聊天</string>
+    <!--profileActivity-->
+    <string name="input">輸入</string>
+    <string name="sent">傳送</string>
 </resources>
