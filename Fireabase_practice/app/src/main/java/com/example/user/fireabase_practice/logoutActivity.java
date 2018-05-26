@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -44,9 +45,8 @@ public class logoutActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(this, profileActivity.class));
         }
         if (v == logoutButton) {
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(this, loginActivity.class));
             finish();
+            startActivity(new Intent(this, loginActivity.class));
         }
     }
 

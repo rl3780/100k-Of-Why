@@ -52,6 +52,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String password = passwordEditText.getText().toString().trim();
         String username = usernameEditText.getText().toString().trim();
 
+        if (TextUtils.isEmpty(username)) {
+            Toast.makeText(this, "Please enter username", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
             return;
@@ -60,10 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this, "Please enter password", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (TextUtils.isEmpty(username)) {
-            Toast.makeText(this, "Please enter username", Toast.LENGTH_SHORT).show();
-            return;
-        }
+
 
         pd.setMessage("Registering User...");
         pd.show();
