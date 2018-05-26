@@ -37,7 +37,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
     private EditText emailEditText;
     private EditText passwordEditText;
-    private Button registerButton;
+    private Button loginButton;
     private TextView loginTextView;
     private ProgressDialog pd;
     private FirebaseAuth fa;
@@ -68,13 +68,12 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                 .build();
 
         sign_in_button = (SignInButton) findViewById(R.id.sign_in_button);
-
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
-        registerButton = (Button) findViewById(R.id.registerButton);
+        loginButton = (Button) findViewById(R.id.loginButton);
         loginTextView = (TextView) findViewById(R.id.loginTextView);
 
-        registerButton.setOnClickListener(this);
+        loginButton.setOnClickListener(this);
         loginTextView.setOnClickListener(this);
         sign_in_button.setOnClickListener(this);
 
@@ -93,7 +92,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         };
     }
 
-    private void registerUser() {
+    private void loginUser() {
         String email = emailEditText.getText().toString().trim();
         String password = passwordEditText.getText().toString().trim();
 
@@ -115,8 +114,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 pd.dismiss();
                                 if (task.isSuccessful()) {
-                                    finish();
-                                    startActivity(new Intent(getApplicationContext(), logoutActivity.class));
+
                                 }
                                 else {
                                     Toast.makeText(loginActivity.this, "login error", Toast.LENGTH_LONG).show();
@@ -128,11 +126,10 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if (v == registerButton) {
-            registerUser();
+        if (v == loginButton) {
+            loginUser();
         }
         if (v == loginTextView) {
-            finish();
             startActivity(new Intent(this, MainActivity.class));
         }
         if (v == sign_in_button) {
@@ -150,7 +147,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         super.onStart();
         if(fa.getCurrentUser() != null){
             emailEditText.setText(fa.getCurrentUser().getEmail());
-            fa.signOut();
         }
         fa.addAuthStateListener(mAuthListener);
     }
@@ -165,11 +161,15 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
 
     public void updateUI(FirebaseUser user) {
         if (user != null) {
+            startActivity(new Intent(getApplicationContext(), logoutActivity.class));
             if(mGoogleApiClient.isConnected()){
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient);
             }
-            finish();
-            startActivity(new Intent(getApplicationContext(), logoutActivity.class));
+        }
+        else{
+            if(mGoogleApiClient.isConnected()){
+                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+            }
         }
     }
 

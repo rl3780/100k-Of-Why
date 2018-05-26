@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         usernameEditText = (EditText) findViewById(R.id.usernameEditText);
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
-        registerButton = (Button) findViewById(R.id.registerButton);
+        registerButton = (Button) findViewById(R.id.loginButton);
         signupTextView = (TextView) findViewById(R.id.signupTextView);
 
 
@@ -102,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             registerUser();
         }
         if (v == signupTextView) {
-            startActivity(new Intent(this, loginActivity.class));
             finish();
         }
     }

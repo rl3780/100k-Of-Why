@@ -45,8 +45,8 @@ public class logoutActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(new Intent(this, profileActivity.class));
         }
         if (v == logoutButton) {
+            fa.signOut();
             finish();
-            startActivity(new Intent(this, loginActivity.class));
         }
     }
 
