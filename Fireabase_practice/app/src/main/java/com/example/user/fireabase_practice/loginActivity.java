@@ -32,6 +32,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.UserInfo;
 
 public class loginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
@@ -114,7 +115,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 pd.dismiss();
                                 if (task.isSuccessful()) {
-
+                                    Log.d(TAG, "signInWithEmailAndPassword success");
                                 }
                                 else {
                                     Toast.makeText(loginActivity.this, "login error", Toast.LENGTH_LONG).show();
@@ -145,9 +146,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onStart() {
         super.onStart();
-        if(fa.getCurrentUser() != null){
-            emailEditText.setText(fa.getCurrentUser().getEmail());
-        }
         fa.addAuthStateListener(mAuthListener);
     }
 
@@ -162,14 +160,6 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     public void updateUI(FirebaseUser user) {
         if (user != null) {
             startActivity(new Intent(getApplicationContext(), logoutActivity.class));
-            if(mGoogleApiClient.isConnected()){
-                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
-            }
-        }
-        else{
-            if(mGoogleApiClient.isConnected()){
-                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
-            }
         }
     }
 
