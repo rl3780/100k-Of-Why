@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".loginActivity"
             android:launchMode="singleTop">
@@ -24,13 +24,17 @@
             android:name=".MainActivity"
             android:launchMode="singleTop" />
 
-        <activity android:name=".profileActivity" />
+        <activity android:name=".profileActivity"
+            android:parentActivityName=".logoutActivity" />
+        <!-- Parent activity meta-data to support 4.0 and lower -->
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".logoutActivity" />
 
         <activity
             android:name=".logoutActivity"
             android:launchMode="singleTop" />
 
-        <activity android:name=".MenuActivity" />
 
     </application>
 

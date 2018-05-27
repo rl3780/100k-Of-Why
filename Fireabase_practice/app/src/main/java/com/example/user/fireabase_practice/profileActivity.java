@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,12 +32,21 @@ public class profileActivity extends AppCompatActivity implements View.OnClickLi
     private FirebaseListAdapter<ChatMessage> adapter;
     private EditText text;
     private DatabaseReference ChatRef;
-    private Button btnreturn;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         fa = FirebaseAuth.getInstance();
 
@@ -52,7 +64,6 @@ public class profileActivity extends AppCompatActivity implements View.OnClickLi
         logoutButton = (Button)findViewById(R.id.logoutButton);
 
         logoutButton.setOnClickListener(this);*/
-        btnreturn = (Button)findViewById(R.id.btn_return);
         send_button = (Button)findViewById(R.id.btn_send);
         text = (EditText)findViewById(R.id.enter_message);
 
@@ -60,7 +71,6 @@ public class profileActivity extends AppCompatActivity implements View.OnClickLi
         displayChatMessages();
 
         send_button.setOnClickListener(this);
-        btnreturn.setOnClickListener(this);
     }
 
     private void displayChatMessages(){
@@ -91,9 +101,6 @@ public class profileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void onClick(View v) {
-        if(v == btnreturn){
-            startActivity(new Intent(profileActivity.this, logoutActivity.class));
-        }
         if(v == send_button){
             if(text.getText().toString().length()!=0) {
                 ChatRef.child("Message")
