@@ -5,7 +5,7 @@
     <string name="register">Register</string>
     <string name="enter_your_name">Enter your name</string>
     <string name="enter_your_email">Enter your email</string>
-    <string name="enter_your_password">Enter your password</string>
+    <string name="enter_your_password">Enter your password(length at least 6)</string>
     <string name="register_user">Register user</string>
     <string name="already_registered">Already Registered? Sign in here</string>
     <!--loginActivity-->
@@ -18,4 +18,13 @@
     <!--profileActivity-->
     <string name="input">input</string>
     <string name="sent">sent</string>
+    <!--MainActivity.java-->
+    <string name="enter_username">Please enter username</string>
+    <string name="enter_email">Please enter email</string>
+    <string name="enter_password">Please enter password</string>
+    <string name="email_incorrect">Incorrect email format</string>
+    <string name="cant_instance">Could not instance..., please try again</string>
+    <string name="email_exist">email already exist</string>
+    <string name="registering">Registering User...</string>
+    <string name="password_incorrect">password length must be at least 6</string>
 </resources>

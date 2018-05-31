@@ -18,6 +18,7 @@
         android:layout_marginTop="24dp"
         android:ems="10"
         android:hint="@string/enter_your_email"
+        android:singleLine="true"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"

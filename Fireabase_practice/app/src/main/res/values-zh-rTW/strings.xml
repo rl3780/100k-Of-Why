@@ -19,4 +19,12 @@
     <!--profileActivity-->
     <string name="input">輸入</string>
     <string name="sent">傳送</string>
+    <string name="enter_username">請輸入使用者名稱</string>
+    <string name="enter_email">請輸入信箱</string>
+    <string name="enter_password">請輸入密碼</string>
+    <string name="email_incorrect">信箱格式不正確</string>
+    <string name="cant_instance">無法連接</string>
+    <string name="email_exist">信箱已使用過</string>
+    <string name="registering">註冊中，請稍後</string>
+    <string name="password_incorrect">密碼長度不足(至少為6)</string>
 </resources>
