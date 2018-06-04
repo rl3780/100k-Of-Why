@@ -2,6 +2,7 @@ package com.example.user.fireabase_practice;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.format.DateFormat;
 import android.view.Menu;
@@ -32,6 +33,28 @@ public class profileActivity extends AppCompatActivity implements View.OnClickLi
     private FirebaseListAdapter<ChatMessage> adapter;
     private EditText text;
     private DatabaseReference ChatRef;
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_information:
+                new AlertDialog.Builder(profileActivity.this)
+                        .setTitle("製作團隊")//設定視窗標題
+                        .setIcon(R.mipmap.why)//設定對話視窗圖示
+                        .setMessage("羅皓煒\n" +
+                                    "呂宜叡\n" +
+                                    "黃柏凱\n" +
+                                    "陳識允\n" +
+                                    "吳泰德\n" +
+                                    "張哲家\n" +
+                                    "吳宗晉")//設定顯示的文字
+                        .show();//呈現對話視窗
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
