@@ -16,15 +16,15 @@
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop" />
-
-        <activity android:name=".profileActivity"
+        <activity
+            android:name=".profileActivity"
             android:parentActivityName=".logoutActivity" />
         <!-- Parent activity meta-data to support 4.0 and lower -->
         <meta-data
@@ -35,7 +35,9 @@
             android:name=".logoutActivity"
             android:launchMode="singleTop" />
 
-
+        <activity
+            android:name=".ResetPWActivity"
+            android:launchMode="singleTop" />
     </application>
 
 </manifest>

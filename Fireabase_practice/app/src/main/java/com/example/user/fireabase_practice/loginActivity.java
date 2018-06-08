@@ -48,6 +48,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     private SignInButton sign_in_button;
     private static final int RC_SIGN_IN = 9001;
     private static final String TAG = "LoginActivity";
+    private Button forgetPWButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,10 +74,12 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
         loginButton = (Button) findViewById(R.id.loginButton);
         loginTextView = (TextView) findViewById(R.id.loginTextView);
+        forgetPWButton = findViewById(R.id.btnForgetPW);
 
         loginButton.setOnClickListener(this);
         loginTextView.setOnClickListener(this);
         sign_in_button.setOnClickListener(this);
+        forgetPWButton.setOnClickListener(this);
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -135,6 +138,9 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         }
         if (v == sign_in_button) {
             signIn();
+        }
+        if (v == forgetPWButton){
+            startActivity(new Intent(this, ResetPWActivity.class));
         }
     }
 
