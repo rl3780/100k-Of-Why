@@ -1,6 +1,7 @@
 package com.example.user.fireabase_practice;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,12 +22,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+
 public class profileActivity extends AppCompatActivity implements View.OnClickListener /*implements View.OnClickListener*/ {
 
     private FirebaseAuth fa;
-    /*
-    private TextView userEmailTextView;
-    private Button logoutButton;*/
 
     private Button send_button;
     private ListView listview;
@@ -80,13 +79,6 @@ public class profileActivity extends AppCompatActivity implements View.OnClickLi
 
         FirebaseUser user = fa.getCurrentUser();
         ChatRef = FirebaseDatabase.getInstance().getReference();
-        /*
-        userEmailTextView = (TextView)findViewById(R.id.userEmailTextView);
-        userEmailTextView.setText("Welcome " + user.getEmail());
-
-        logoutButton = (Button)findViewById(R.id.logoutButton);
-
-        logoutButton.setOnClickListener(this);*/
         send_button = (Button)findViewById(R.id.btn_send);
         text = (EditText)findViewById(R.id.enter_message);
 
@@ -102,7 +94,6 @@ public class profileActivity extends AppCompatActivity implements View.OnClickLi
                 .setLayout(R.layout.message)
                 .setQuery(ChatRef.child("Message"), ChatMessage.class)
                 .build();
-
         adapter = new FirebaseListAdapter<ChatMessage>(options){
             @Override
             protected void populateView(View v, ChatMessage model, int position) {
@@ -111,13 +102,25 @@ public class profileActivity extends AppCompatActivity implements View.OnClickLi
                 TextView messageUser = (TextView)v.findViewById(R.id.message_user);
                 TextView messageTime = (TextView)v.findViewById(R.id.message_time);
 
-                // Set their text
+                // Set their tex
                 messageText.setText(model.getMessageText());
-                messageUser.setText(model.getMessageUser());
+                if(model.getMessageUser().equals(fa.getCurrentUser().getDisplayName())) {
+                    messageUser.setTypeface(Typeface.create(messageUser.getTypeface(), Typeface.NORMAL), Typeface.NORMAL);
+                    messageUser.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
+                            model.getMessageTime()));
+                    // Format the date before showing it
+                    messageTime.setTypeface(Typeface.create(messageTime.getTypeface(), Typeface.BOLD), Typeface.BOLD);
+                    messageTime.setText(model.getMessageUser());
+                }
+                else{
+                    messageUser.setTypeface(Typeface.create(messageUser.getTypeface(), Typeface.BOLD), Typeface.BOLD);
+                    messageUser.setText(model.getMessageUser());
+                    // Format the date before showing it
+                    messageTime.setTypeface(Typeface.create(messageTime.getTypeface(), Typeface.NORMAL), Typeface.NORMAL);
+                    messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
+                            model.getMessageTime()));
+                }
 
-                // Format the date before showing it
-                messageTime.setText(DateFormat.format("dd-MM-yyyy (HH:mm:ss)",
-                        model.getMessageTime()));
             }
         };
         listview.setAdapter(adapter);
