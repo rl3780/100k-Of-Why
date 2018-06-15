@@ -2,6 +2,7 @@ package com.example.user.fireabase_practice;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -14,17 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -32,10 +28,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.auth.UserInfo;
 
 public class loginActivity extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.OnConnectionFailedListener {
 
+
+    public static final String KEY_PROFILE_NAME = "KEY_USER_PROFILE";
+    private static final int RC_SIGN_IN = 9001;
+    private static final String TAG = "LoginActivity";
+    private static final String KEY_USER_NAME = "KEY_USER_NAME";
     private EditText emailEditText;
     private EditText passwordEditText;
     private Button loginButton;
@@ -46,9 +46,11 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     private GoogleSignInOptions gso;
     private GoogleApiClient mGoogleApiClient;
     private SignInButton sign_in_button;
-    private static final int RC_SIGN_IN = 9001;
-    private static final String TAG = "LoginActivity";
     private Button forgetPWButton;
+
+    // 記住帳號的
+    private SharedPreferences loginPrefsReader;// 讀
+    private SharedPreferences.Editor loginPrefsEditor;// 寫
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,20 +87,23 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null) {
+                if (user != null) {
                     Log.d(TAG, "onAuthStateChanged: signed_in: " + user.getUid());
-                }
-                else{
+                } else {
                     Log.d(TAG, "onAuthStateChanged: signed_out");
                 }
                 updateUI(user);
             }
         };
+
+        // 取得上次登入的帳號
+        loginPrefsReader = getSharedPreferences(KEY_PROFILE_NAME, MODE_PRIVATE);
+        loginPrefsEditor = loginPrefsReader.edit();
     }
 
     private void loginUser() {
-        String email = emailEditText.getText().toString().trim();
-        String password = passwordEditText.getText().toString().trim();
+        final String email = emailEditText.getText().toString().trim();
+        final String password = passwordEditText.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, R.string.enter_your_name, Toast.LENGTH_LONG).show();
@@ -119,8 +124,10 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
                                 pd.dismiss();
                                 if (task.isSuccessful()) {
                                     Log.d(TAG, "signInWithEmailAndPassword success");
-                                }
-                                else {
+
+                                    // 記住帳號
+                                    loginPrefsEditor.putString(KEY_USER_NAME, email).commit();
+                                } else {
                                     Toast.makeText(loginActivity.this, "login error", Toast.LENGTH_LONG).show();
                                 }
                             }
@@ -139,7 +146,7 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         if (v == sign_in_button) {
             signIn();
         }
-        if (v == forgetPWButton){
+        if (v == forgetPWButton) {
             startActivity(new Intent(this, ResetPWActivity.class));
         }
     }
@@ -153,12 +160,17 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
     public void onStart() {
         super.onStart();
         fa.addAuthStateListener(mAuthListener);
+
+        // 取得上次登入的帳號
+        emailEditText.setText(loginPrefsReader.getString(KEY_USER_NAME, ""));
+        passwordEditText.setText("");
     }
 
     @Override
-    public void onStop(){
-        super.onStop();;
-        if(mAuthListener != null){
+    public void onStop() {
+        super.onStop();
+
+        if (mAuthListener != null) {
             fa.removeAuthStateListener(mAuthListener);
         }
     }
@@ -176,11 +188,13 @@ public class loginActivity extends AppCompatActivity implements View.OnClickList
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            if(result.isSuccess()) {
+            if (result.isSuccess()) {
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
-            }
-            else{
+
+                // 不要記住帳號
+                loginPrefsEditor.putString(KEY_USER_NAME, "").commit();
+            } else {
                 updateUI(null);
             }
         }
