@@ -11,6 +11,7 @@
     <!--loginActivity-->
     <string name="login">Login</string>
     <string name="not_have_account">Not have an account? Sign up here</string>
+    <string name="btn_forget_password">Forget Password ?</string>
     <!--logoutActivity-->
     <string name="user_name">Username</string>
     <string name="logout">logout</string>
@@ -27,4 +28,11 @@
     <string name="email_exist">email already exist</string>
     <string name="registering">Registering User...</string>
     <string name="password_incorrect">password length must be at least 6</string>
+    <!--ResetPWActivity-->
+    <string name="forget_your_password">Forget your Password?</string>
+    <string name="reset_password_instruction">To reset password, enter your email, press the button and check mail to follow instruction.</string>
+    <string name="edt_email">Your email here</string>
+    <string name="btn_reset_password">Reset Password</string>
+    <string name="btn_back_resetpw">Back</string>
+
 </resources>

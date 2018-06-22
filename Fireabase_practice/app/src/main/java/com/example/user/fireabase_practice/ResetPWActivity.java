@@ -48,19 +48,27 @@ public class ResetPWActivity extends AppCompatActivity implements View.OnClickLi
     private void sendResetEmail() {
         String email = edtEmail.getText().toString().trim();
 
-        if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Enter your email!",Toast.LENGTH_SHORT).show();
-        }
-        else{
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(this, "Enter your email!", Toast.LENGTH_SHORT).show();
+        } else {
+            // 信件的語言使用App手機的語言
+            fa.useAppLanguage();
+
+            //先鎖起來 失敗再打開
+            edtEmail.setEnabled(false);
+            btnSendReset.setEnabled(false);
+
             fa.sendPasswordResetEmail(email)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(ResetPWActivity.this,"Check email to reset your password!",Toast.LENGTH_SHORT).show();
-                            }
-                            else{
-                                Toast.makeText(ResetPWActivity.this,"Fail to send reset password email!",Toast.LENGTH_SHORT).show();
+                            if (task.isSuccessful()) {
+                                Toast.makeText(ResetPWActivity.this, "Check email to reset your password!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                //失敗再打開
+                                edtEmail.setEnabled(true);
+                                btnSendReset.setEnabled(true);
+                                Toast.makeText(ResetPWActivity.this, "Fail to send reset password email!", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

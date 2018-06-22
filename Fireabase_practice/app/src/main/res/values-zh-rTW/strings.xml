@@ -12,6 +12,7 @@
     <!--loginActivity-->
     <string name="login">登入</string>
     <string name="not_have_account">還沒有帳號嗎? 建立一個</string>
+    <string name="btn_forget_password">忘記密碼?</string>
     <!--logoutActivity-->
     <string name="user_name">使用者名稱</string>
     <string name="logout">登出</string>
@@ -27,4 +28,11 @@
     <string name="email_exist">信箱已使用過</string>
     <string name="registering">註冊中，請稍後</string>
     <string name="password_incorrect">密碼長度不足(至少為6)</string>
+    <!--ResetPWActivity-->
+    <string name="forget_your_password">忘記密碼?</string>
+    <string name="reset_password_instruction">若要重設密碼，請在下方輸入您的Email信箱，並根據信件上的指示去重設密碼。</string>
+    <string name="edt_email">請輸入您的Email信箱</string>
+    <string name="btn_reset_password">重設密碼</string>
+    <string name="btn_back_resetpw">回上一頁</string>
+
 </resources>
